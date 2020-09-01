@@ -26,6 +26,7 @@ namespace WebAppMVC.Controllers
             ViewBag.Param9 = (!string.IsNullOrEmpty(param)) ? param : "&lt;script&gt;alert(9)&lt;/script&gt;";
             ViewBag.Param10 = (!string.IsNullOrEmpty(param)) ? param : "javascript:alert(10)";
             ViewBag.Param11 = (!string.IsNullOrEmpty(param)) ? param : "alert(11)";
+            ViewBag.Param12 = (!string.IsNullOrEmpty(param)) ? param : "alert(12)";
 
             return View();
         }
