@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+    // NOT VULNERABLE - JS CODE
+    "@ViewBag.Param1";
+    '@ViewBag.Param2';
+    @Html.Raw(Json.Encode(ViewBag.Param3));
+    @Html.Raw(ViewBag.Param4);
+    @Html.Raw(ViewBag.Param5);
+    @*@ViewBag.Param6;*@
+    JSON.stringify('@ViewBag.Param7');
+
+    // VULNERABLE - JS CODE
+    "@Html.Raw(ViewBag.Param1)";
+    '@Html.Raw(ViewBag.Param2)';
+    @ViewBag.Param3;
+    @*@Html.Raw(ViewBag.Param4);
+    @Html.Raw(ViewBag.Param5);*@
+    @Html.Raw(ViewBag.Param6);
+    JSON.stringify('@Html.Raw(ViewBag.Param7)');
+</script>
+<!-- NOT VULNERABLE - HTML CODE -->
+<div>@ViewBag.Param8</div><br />
+<div>@HttpUtility.HtmlDecode(ViewBag.Param9)</div><br />
+
+<a href="@Html.Raw(Json.Encode(ViewBag.Param10))">Not Vulnerable 10</a><br />
+<a href="#" onclick="@Html.Raw(Json.Encode(@ViewBag.Param11))">Not Vulnerable 11</a>
+
+<!-- VULNERABLE - HTML CODE -->
+<div>@Html.Raw(ViewBag.Param8)</div><br />
+<div>@Html.Raw(HttpUtility.HtmlDecode(ViewBag.Param9))</div><br />
+
+<a href="@Html.Raw(ViewBag.Param10)">Vulnerable 10</a><br />
+<a href="#" onclick="@Html.Raw(ViewBag.Param11)">Vulnerable 11</a>
